@@ -1,8 +1,10 @@
-import { bookSlice } from './books';
-import { combineReducers, Reducer } from '@reduxjs/toolkit';
+import bookReducer from './books';
+import popupReducer from './popups';
+import { combineReducers } from '@reduxjs/toolkit';
 
 const combinedSlices = {
-  books: bookSlice.reducer,
+  books: bookReducer,
+  popups: popupReducer,
 };
 
 const rootReducer = combineReducers(combinedSlices);

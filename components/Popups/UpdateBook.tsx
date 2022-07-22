@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { useAppDispatch } from '../../store';
+import { useAppDispatch, useAppSelector } from '../../store';
 import { addBook } from '../../store/slices/books';
 import { closePopup } from '../../store/slices/popups';
 import { IBook } from '../../store/models/IBook';
@@ -7,21 +7,22 @@ import Button from '../Common/Button';
 
 const AddBook: FC = () => {
   const dispatch = useAppDispatch();
-  const [title, setTitle] = useState<string>('');
-  const [category, setCategory] = useState<string>('');
-  const [description, setDescription] = useState<string>('');
-  const [price, setPrice] = useState<number>(0);
-  const [added, setAdded] = useState<Boolean>(false);
+  const book = useAppSelector((state) => state.popups.entity);
+  const [title, setTitle] = useState<string>(book!.name);
+  const [category, setCategory] = useState<string>(book!.category);
+  const [description, setDescription] = useState<string>(book!.description);
+  const [price, setPrice] = useState<number>(book!.price);
+  const [updated, setUpdated] = useState<Boolean>(false);
 
   useEffect(() => {
-    if (added) {
+    if (updated) {
       setTimeout(() => {
         dispatch(closePopup());
       }, 1000);
     }
-  }, [added]);
+  }, [updated]);
 
-  const onAddBook = () => {
+  const onUpdateBook = () => {
     dispatch(
       addBook({
         name: title,
@@ -30,11 +31,11 @@ const AddBook: FC = () => {
         price,
       } as IBook)
     );
-    setAdded(true);
+    setUpdated(true);
   };
 
-  if (added) {
-    return <div>Book {title} added!</div>;
+  if (updated) {
+    return <div>Book updated!</div>;
   }
 
   return (
@@ -45,6 +46,7 @@ const AddBook: FC = () => {
         type="text"
         id="title"
         name="title"
+        defaultValue={title}
         onChange={(e) => {
           setTitle(e.target.value);
         }}
@@ -56,6 +58,7 @@ const AddBook: FC = () => {
         type="text"
         id="category"
         name="category"
+        defaultValue={category}
         onChange={(e) => {
           setCategory(e.target.value);
         }}
@@ -67,6 +70,7 @@ const AddBook: FC = () => {
         type="text"
         id="description"
         name="description"
+        defaultValue={description}
         onChange={(e) => {
           setDescription(e.target.value);
         }}
@@ -79,12 +83,13 @@ const AddBook: FC = () => {
         step="0.01"
         id="price"
         name="price"
+        defaultValue={price}
         onChange={(e) => {
           setPrice(+e.target.value);
         }}
       />
       <br />
-      <Button name="Add" onClick={onAddBook} />
+      <Button name="Update" onClick={onUpdateBook} />
     </div>
   );
 };
