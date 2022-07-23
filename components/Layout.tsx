@@ -1,9 +1,12 @@
 import { FC } from 'react';
+import Link from 'next/link';
 
 const Header: FC = () => {
   return (
     <header className="bg-black w-full">
-      <h1 className="text-white text-4xl font-bold p-5">My Book Store</h1>
+      <h1 className="text-white text-4xl font-bold p-5">
+        <Link href="/book">My Book Store</Link>
+      </h1>
     </header>
   );
 };

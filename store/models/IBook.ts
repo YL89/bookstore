@@ -4,5 +4,5 @@ export interface IBook {
   price: number;
   category: string;
   description: string;
-  createdAt: Date;
+  createdAt: number;
 }

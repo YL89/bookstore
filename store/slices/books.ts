@@ -2,7 +2,6 @@ import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { nanoid } from 'nanoid';
 import { IBook } from '../models/IBook';
 import { MyBookStorage } from '../../storage/indexDb';
-import { AppDispatch } from '..';
 
 const db = new MyBookStorage();
 
@@ -30,15 +29,18 @@ const bookSlice = createSlice({
     addBook: (state, action: PayloadAction<IBook>) => {
       const newBook = action.payload;
       newBook.id = nanoid();
-      newBook.createdAt = new Date();
+      newBook.createdAt = Date.now();
       state.entities.push(action.payload);
+      db.saveOrUpdate(newBook);
     },
     updateBook: (state, action: PayloadAction<IBook>) => {
       const i = state.entities.findIndex((book) => book.id === action.payload.id);
       state.entities[i] = action.payload;
+      db.saveOrUpdate(action.payload);
     },
     removeBook: (state, action: PayloadAction<string>) => {
       state.entities = state.entities.filter((book) => book.id != action.payload);
+      db.remove(action.payload);
     },
   },
   extraReducers: (builder) => {

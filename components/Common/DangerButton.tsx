@@ -1,6 +1,10 @@
-import { FC } from 'react';
+import { FC, MouseEvent } from 'react';
 
-const DangerButton: FC<{ name: string; onClick: () => void; css?: {} }> = ({ name, onClick }) => {
+const DangerButton: FC<{
+  name: string;
+  onClick: (e: MouseEvent<HTMLButtonElement>) => void;
+  css?: {};
+}> = ({ name, onClick }) => {
   return (
     <button
       onClick={onClick}

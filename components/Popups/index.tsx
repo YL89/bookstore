@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic';
 import { useAppSelector } from '../../store';
 
 const AddBookPopup = dynamic(() => import('./AddBook'), { ssr: false });
-const UpdateBookPopup = dynamic(() => import('./AddBook'), { ssr: false });
+const UpdateBookPopup = dynamic(() => import('./UpdateBook'), { ssr: false });
 const DeleteBookPopup = dynamic(() => import('./DeleteBook'), { ssr: false });
 
 const Popups = () => {

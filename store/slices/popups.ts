@@ -30,6 +30,7 @@ const popupSlice = createSlice({
     },
     closePopup: (state) => {
       state.event = 'CLOSE';
+      state.entity = null;
     },
   },
 });

@@ -1,14 +1,15 @@
-import { FC, memo } from 'react';
+import { FC, memo, MouseEvent } from 'react';
 import { IBook } from '../store/models/IBook';
 import { useAppDispatch } from '../store';
 import { updateBookPopup, deleteBookPopup } from '../store/slices/popups';
-import Button from './Common/Button';
+import DangerButton from './Common/DangerButton';
 
 const BookItem: FC<{ book: IBook }> = ({ book }) => {
   const dispatch = useAppDispatch();
   const { name, description, price, category } = book;
 
-  const onDelete = () => {
+  const onDelete = (e: MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
     dispatch(deleteBookPopup(book));
   };
 
@@ -17,12 +18,12 @@ const BookItem: FC<{ book: IBook }> = ({ book }) => {
   };
 
   return (
-    <div className="w-300 h-400 border-2" onClick={onClick}>
+    <div className="w-300 h-400 border-2 hover:cursor-pointer" onClick={onClick}>
       <p>Title: {name}</p>
       <p>Description: {description}</p>
       <p>Category: {category}</p>
       <p>Price: {price}</p>
-      <Button name="Delete" onClick={onDelete} />
+      <DangerButton name="Delete" onClick={onDelete} />
     </div>
   );
 };

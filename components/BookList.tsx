@@ -1,12 +1,9 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import { useAppSelector } from '../store';
 import BookItem from './BookItem';
-import { MyBookStorage } from '../storage/indexDb';
 import { IBook } from '../store/models/IBook';
 import { useAppDispatch } from '../store';
 import { getHistoryBooks } from '../store/slices/books';
-
-const db = new MyBookStorage();
 
 const BookList: FC = () => {
   const dispatch = useAppDispatch();
@@ -19,9 +16,6 @@ const BookList: FC = () => {
 
   useEffect(() => {
     dispatch(getHistoryBooks());
-    return () => {
-      db.saveAll(booksRef.current);
-    };
   }, []);
 
   if (loading) {

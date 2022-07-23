@@ -12,8 +12,16 @@ export class MyBookStorage extends Dexie {
     });
   }
 
-  saveAll(books: IBook[]): void {
-    this.books.bulkPut(books).catch((err) => console.log(err));
+  saveOrUpdate(book: IBook): void {
+    this.books.put(book);
+  }
+
+  update(book: IBook): void {
+    this.books.update(book.id!, book);
+  }
+
+  remove(id: string): void {
+    this.books.delete(id);
   }
 
   async getAll(): Promise<IBook[]> {

@@ -1,9 +1,8 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState, FormEvent } from 'react';
 import { useAppDispatch } from '../../store';
 import { addBook } from '../../store/slices/books';
 import { closePopup } from '../../store/slices/popups';
 import { IBook } from '../../store/models/IBook';
-import Button from '../Common/Button';
 
 const AddBook: FC = () => {
   const dispatch = useAppDispatch();
@@ -11,17 +10,9 @@ const AddBook: FC = () => {
   const [category, setCategory] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [price, setPrice] = useState<number>(0);
-  const [added, setAdded] = useState<Boolean>(false);
 
-  useEffect(() => {
-    if (added) {
-      setTimeout(() => {
-        dispatch(closePopup());
-      }, 1000);
-    }
-  }, [added]);
-
-  const onAddBook = () => {
+  const onAddBook = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     dispatch(
       addBook({
         name: title,
@@ -30,61 +21,100 @@ const AddBook: FC = () => {
         price,
       } as IBook)
     );
-    setAdded(true);
+    dispatch(closePopup());
   };
 
-  if (added) {
-    return <div>Book {title} added!</div>;
-  }
-
   return (
-    <div className={`z-100 max-w-500 w-500 max-h-800 h-500 border-2`}>
-      <label htmlFor="title">Title</label>
-      <br />
-      <input
-        type="text"
-        id="title"
-        name="title"
-        onChange={(e) => {
-          setTitle(e.target.value);
-        }}
-      />
-      <br />
-      <label htmlFor="title">Category</label>
-      <br />
-      <input
-        type="text"
-        id="category"
-        name="category"
-        onChange={(e) => {
-          setCategory(e.target.value);
-        }}
-      />
-      <br />
-      <label htmlFor="title">Description</label>
-      <br />
-      <input
-        type="text"
-        id="description"
-        name="description"
-        onChange={(e) => {
-          setDescription(e.target.value);
-        }}
-      />
-      <br />
-      <label htmlFor="title">Price</label>
-      <br />
-      <input
-        type="number"
-        step="0.01"
-        id="price"
-        name="price"
-        onChange={(e) => {
-          setPrice(+e.target.value);
-        }}
-      />
-      <br />
-      <Button name="Add" onClick={onAddBook} />
+    <div
+      className={`flex items-center justify-center overflow-y-auto overflow-x-hidden bg-slate-700/50 fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-screen`}
+    >
+      <div className="relative p-4 w-full max-w-md h-full md:h-auto ">
+        <div className="relative m-auto bg-white rounded-lg shadow ">
+          <button
+            type="button"
+            className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
+            data-modal-toggle="authentication-modal"
+            onClick={() => {
+              dispatch(closePopup());
+            }}
+          >
+            <svg
+              className="w-5 h-5"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </button>
+          <div className="py-6 px-6">
+            <h3 className="mb-4 text-xl font-medium text-gray-900">Add a new book</h3>
+            <form onSubmit={onAddBook}>
+              <label htmlFor="title">Title</label>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                className="w-full border hover:border-slate-500 focus:border-slate-500 focus:ring-sky-500 block rounded-lg"
+                onChange={(e) => {
+                  setTitle(e.target.value);
+                }}
+                required
+              />
+
+              <label htmlFor="title">Category</label>
+              <input
+                type="text"
+                id="category"
+                name="category"
+                className="w-full border hover:border-slate-500 focus:border-slate-500 focus:ring-sky-500 block rounded-lg"
+                onChange={(e) => {
+                  setCategory(e.target.value);
+                }}
+                required
+              />
+
+              <label htmlFor="title">Description</label>
+              <input
+                type="text"
+                id="description"
+                name="description"
+                className="w-full border hover:border-slate-500 focus:border-slate-500 focus:ring-sky-500 block rounded-lg"
+                onChange={(e) => {
+                  setDescription(e.target.value);
+                }}
+                required
+              />
+
+              <label htmlFor="title">Price</label>
+              <input
+                type="number"
+                step="0.01"
+                id="price"
+                name="price"
+                className="w-full border hover:border-slate-500 focus:border-slate-500 focus:ring-sky-500 block rounded-lg"
+                onChange={(e) => {
+                  setPrice(+e.target.value);
+                }}
+                required
+              />
+
+              <div className="m-auto flex">
+                <button
+                  type="submit"
+                  className="bg-slate-500 hover:bg-slate-700 px-10 py-2 my-5 cursor-pointer rounded-md text-white text-lg w-full"
+                >
+                  Add
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
