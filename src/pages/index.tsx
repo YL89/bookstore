@@ -15,6 +15,7 @@ const MainPage: NextPage = () => {
     <>
       <div className="px-5 pt-5">
         <button
+          name="add-book"
           className="bg-slate-500 hover:bg-slate-700 px-10 py-2 ml-3 cursor-pointer rounded-md text-white text-lg"
           onClick={onAddBook}
         >

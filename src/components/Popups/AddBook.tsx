@@ -57,6 +57,7 @@ const AddBook: FC = () => {
             <form onSubmit={onAddBook}>
               <label htmlFor="title">Title</label>
               <input
+                data-cy="name"
                 type="text"
                 id="title"
                 name="title"
@@ -69,6 +70,7 @@ const AddBook: FC = () => {
 
               <label htmlFor="title">Category</label>
               <input
+                data-cy="category"
                 type="text"
                 id="category"
                 name="category"
@@ -81,6 +83,7 @@ const AddBook: FC = () => {
 
               <label htmlFor="title">Description</label>
               <input
+                data-cy="desc"
                 type="text"
                 id="description"
                 name="description"
@@ -93,6 +96,7 @@ const AddBook: FC = () => {
 
               <label htmlFor="title">Price</label>
               <input
+                data-cy="price"
                 type="number"
                 step="0.01"
                 id="price"

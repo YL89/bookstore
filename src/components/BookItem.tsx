@@ -26,14 +26,21 @@ const BookItem: FC<{ book: IBook; pClassName: string }> = ({ book, pClassName })
     <div
       className="flex flex-col border-1 hover:cursor-pointer hover:shadow-xl rounded-lg bg-slate-100 p-4 m-3 "
       onClick={onClick}
+      data-cy={book.name}
     >
       <p>Title:</p>
-      <p className={pClassName}>{name}</p>
+      <p className={pClassName} data-cy="book-name">
+        {name}
+      </p>
       <p>Description:</p>
-      <p className={pClassName}>{description}</p>
+      <p className={pClassName} data-cy="book-desc">
+        {description}
+      </p>
       <p>Category:</p>
-      <p className={pClassName}>{category}</p>
-      <p>
+      <p className={pClassName} data-cy="book-category">
+        {category}
+      </p>
+      <p className={pClassName} data-cy="book-price">
         Price: <span className="text-rose-900">{price}</span>
       </p>
       <button onClick={onDelete} className="mt-auto mx-auto hover:text-red-800">
