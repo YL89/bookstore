@@ -2,13 +2,21 @@
 module.exports = {
   content: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      gridAutoRows: {
+        book: '250px',
+      },
+      gridTemplateColumns: {
+        'book-4': 'repeat(4, 200px)',
+        'book-6': 'repeat(6, 200px)',
+        'book-8': 'repeat(8, 200px)',
+        'book-2': 'repeat(2, 200px)',
+        'book-1': 'repeat(1, 200px)',
+      },
+    },
   },
   plugins: [],
   safelist: [
-    {
-      pattern: /(bg|text|border)-s2cond(Purple|Pink|Orange|Yellow|Lime|Mint|Test|Test2)/,
-    },
     {
       pattern: /(mt|mb|mr|ml|my|mx|px|py|pt|pb|pl|pr)-[0-9]+/,
     },

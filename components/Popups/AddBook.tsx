@@ -1,8 +1,10 @@
-import { FC, useEffect, useState, FormEvent } from 'react';
+import { FC, useState, FormEvent } from 'react';
 import { useAppDispatch } from '../../store';
 import { addBook } from '../../store/slices/books';
 import { closePopup } from '../../store/slices/popups';
 import { IBook } from '../../store/models/IBook';
+import { useSpring, animated } from 'react-spring';
+import useFadeIn from '../../hooks/useFadeIn';
 
 const AddBook: FC = () => {
   const dispatch = useAppDispatch();
@@ -10,6 +12,7 @@ const AddBook: FC = () => {
   const [category, setCategory] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [price, setPrice] = useState<number>(0);
+  const FadeInWrapper = useFadeIn();
 
   const onAddBook = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -25,9 +28,7 @@ const AddBook: FC = () => {
   };
 
   return (
-    <div
-      className={`flex items-center justify-center overflow-y-auto overflow-x-hidden bg-slate-700/50 fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-screen`}
-    >
+    <FadeInWrapper className="flex items-center justify-center overflow-y-auto overflow-x-hidden bg-slate-700/50 fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-screen">
       <div className="relative p-4 w-full max-w-md h-full md:h-auto ">
         <div className="relative m-auto bg-white rounded-lg shadow ">
           <button
@@ -45,9 +46,9 @@ const AddBook: FC = () => {
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                clip-rule="evenodd"
+                clipRule="evenodd"
               ></path>
             </svg>
           </button>
@@ -59,7 +60,7 @@ const AddBook: FC = () => {
                 type="text"
                 id="title"
                 name="title"
-                className="w-full border hover:border-slate-500 focus:border-slate-500 focus:ring-sky-500 block rounded-lg"
+                className="w-full border hover:border-slate-500 focus:border-slate-500 focus:ring-sky-500 block rounded-lg pl-2"
                 onChange={(e) => {
                   setTitle(e.target.value);
                 }}
@@ -71,7 +72,7 @@ const AddBook: FC = () => {
                 type="text"
                 id="category"
                 name="category"
-                className="w-full border hover:border-slate-500 focus:border-slate-500 focus:ring-sky-500 block rounded-lg"
+                className="w-full border hover:border-slate-500 focus:border-slate-500 focus:ring-sky-500 block rounded-lg pl-2"
                 onChange={(e) => {
                   setCategory(e.target.value);
                 }}
@@ -83,7 +84,7 @@ const AddBook: FC = () => {
                 type="text"
                 id="description"
                 name="description"
-                className="w-full border hover:border-slate-500 focus:border-slate-500 focus:ring-sky-500 block rounded-lg"
+                className="w-full border hover:border-slate-500 focus:border-slate-500 focus:ring-sky-500 block rounded-lg pl-2"
                 onChange={(e) => {
                   setDescription(e.target.value);
                 }}
@@ -96,7 +97,7 @@ const AddBook: FC = () => {
                 step="0.01"
                 id="price"
                 name="price"
-                className="w-full border hover:border-slate-500 focus:border-slate-500 focus:ring-sky-500 block rounded-lg"
+                className="w-full border hover:border-slate-500 focus:border-slate-500 focus:ring-sky-500 block rounded-lg pl-2 text-rose-900"
                 onChange={(e) => {
                   setPrice(+e.target.value);
                 }}
@@ -115,7 +116,8 @@ const AddBook: FC = () => {
           </div>
         </div>
       </div>
-    </div>
+      {/* </div> */}
+    </FadeInWrapper>
   );
 };
 

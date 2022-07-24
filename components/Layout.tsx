@@ -13,7 +13,7 @@ const Header: FC = () => {
 
 const Footer: FC = () => {
   return (
-    <footer className="bg-black w-full bottom-0 absolute">
+    <footer className="bg-black w-full justify-end">
       <p className="m-auto text-white text-center text-2xl font-bold p-5">by Yuhao Lu, 2022</p>
     </footer>
   );
@@ -21,10 +21,12 @@ const Footer: FC = () => {
 
 const Layout: FC<{ children: JSX.Element }> = ({ children }) => {
   return (
-    <div className="container mx-auto h-full relative">
-      <Header />
-      <div className="flex flex-col">{children}</div>
-      <Footer />
+    <div className="w-full flex h-full">
+      <div className="mx-auto relative flex flex-col  max-w-1920 ">
+        <Header />
+        <div className="grow flex flex-col max-h-full overflow-y-auto">{children}</div>
+        <Footer />
+      </div>
     </div>
   );
 };
