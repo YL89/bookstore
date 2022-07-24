@@ -15,8 +15,6 @@ const FadeInWrapper: FC<{ children: JSX.Element; className: string }> = ({
 };
 
 const useFadeIn = (): FC<{ children: JSX.Element; className: string }> => {
-  const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 } });
-
   return FadeInWrapper;
 };
 
