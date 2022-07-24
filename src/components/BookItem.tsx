@@ -1,4 +1,4 @@
-import { FC, memo, MouseEvent } from 'react';
+import { FC, memo, MouseEvent, useEffect, useRef } from 'react';
 import { IBook } from '../store/models/IBook';
 import { useAppDispatch } from '../store';
 import { updateBookPopup, deleteBookPopup } from '../store/slices/popups';
@@ -6,6 +6,7 @@ import { updateBookPopup, deleteBookPopup } from '../store/slices/popups';
 const BookItem: FC<{ book: IBook; pClassName: string }> = ({ book, pClassName }) => {
   const dispatch = useAppDispatch();
   const { name, description, price, category } = book;
+  const bookRef = useRef<IBook>(book);
 
   const onDelete = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
@@ -15,6 +16,11 @@ const BookItem: FC<{ book: IBook; pClassName: string }> = ({ book, pClassName })
   const onClick = () => {
     dispatch(updateBookPopup(book));
   };
+
+  useEffect(() => {
+    console.log(JSON.stringify(bookRef.current) === JSON.stringify(book)); //true
+    bookRef.current = book;
+  }, [JSON.stringify(book)]);
 
   return (
     <div
