@@ -8,7 +8,7 @@ const pClassName = 'text-ellipsis text-sky-800 overflow-hidden';
 
 const BookList: FC = () => {
   const dispatch = useAppDispatch();
-  const { loading, entities: books, error } = useAppSelector((state) => state.books);
+  const { loading, entities: books } = useAppSelector((state) => state.books);
 
   useEffect(() => {
     dispatch(getHistoryBooks());

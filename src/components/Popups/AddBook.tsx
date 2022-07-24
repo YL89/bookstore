@@ -3,7 +3,6 @@ import { useAppDispatch } from '../../store';
 import { addBook } from '../../store/slices/books';
 import { closePopup } from '../../store/slices/popups';
 import { IBook } from '../../store/models/IBook';
-import { useSpring, animated } from 'react-spring';
 import useFadeIn from '../../hooks/useFadeIn';
 
 const AddBook: FC = () => {

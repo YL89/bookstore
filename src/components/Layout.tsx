@@ -19,6 +19,7 @@ const Footer: FC = () => {
   );
 };
 
+// eslint-disable-next-line no-undef
 const Layout: FC<{ children: JSX.Element }> = ({ children }) => {
   return (
     <div className="w-full flex h-full">

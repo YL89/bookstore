@@ -1,4 +1,4 @@
-import { FC, MouseEvent } from 'react';
+import { FC } from 'react';
 import useFadeIn from '../../hooks/useFadeIn';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { removeBook } from '../../store/slices/books';
@@ -9,7 +9,7 @@ const DeleteBook: FC = () => {
   const book = useAppSelector((state) => state.popups.entity);
   const FadeInWrapper = useFadeIn();
 
-  const onDelete = (e: MouseEvent<HTMLButtonElement>) => {
+  const onDelete = () => {
     dispatch(removeBook(book!.id!));
     dispatch(closePopup());
   };
